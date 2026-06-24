@@ -1,33 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Portfolio của Nguyễn Phan Diễm My đã load xong!');
     
-    // 1. XỬ LÝ ĐỔI CHẾ ĐỘ TỐI / SÁNG (DARK MODE)
-    const toggleBtn = document.getElementById('dark-mode-toggle');
+    // --- KHU VỰC 1: XỬ LÝ HIỆU ỨNG CUỘN ẨN HIỆN (INTERSECTION OBSERVER) ---
+    const projects = document.querySelectorAll('.project');
     
-    toggleBtn.addEventListener('click', () => {
-        // Thêm hoặc xóa class "dark-mode" ở thẻ body
-        document.body.classList.toggle('dark-mode');
-        
-        // Đổi chữ hiển thị trên nút tương ứng
-        if (document.body.classList.contains('dark-mode')) {
-            toggleBtn.innerText = "☀️ Chế độ sáng";
-        } else {
-            toggleBtn.innerText = "🌙 Chế độ tối";
-        }
-    });
+    const observerOptions = {
+        root: null, // Lấy toàn bộ màn hình trình duyệt làm khung nền
+        threshold: 0.15 // Khi dự án ló diện được 15% diện tích thì kích hoạt hiệu ứng
+    };
 
-    // 2. XỬ LÝ HIỆU ỨNG HIỆN HÌNH KHI CUỘN TRANG (INTERSECTION OBSERVER)
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            // Nếu phần tử lọt vào tầm nhìn của màn hình
+    const projectObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('show'); // Thêm class "show" để chạy CSS transition
+                entry.target.classList.add('show'); // Thêm class .show để làm hiện phần dưới
+                observer.unobserve(entry.target); // Hiện xong thì ngừng theo dõi để tiết kiệm hiệu năng
             }
         });
-    }, {
-        threshold: 0.1 // Chỉ cần 10% diện tích dự án xuất hiện là kích hoạt hiệu ứng
-    });
+    }, observerOptions);
 
-    // Tìm tất cả các thẻ có class .project và bắt đầu theo dõi hành vi cuộn chuột
-    const projects = document.querySelectorAll('.project');
-    projects.forEach((el) => observer.observe(el));
+    projects.forEach(project => {
+        projectObserver.observe(project);
+    });
 });
