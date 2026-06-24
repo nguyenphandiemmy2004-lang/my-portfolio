@@ -1,1 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Nguyễn Văn A</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Trang chủ</a>
+        <a href="about.html">Giới thiệu</a>
+        <a href="contact.html">Liên hệ</a>
+    </nav>
 
+    <section style="max-width: 500px;">
+        <h2>Liên hệ với mình</h2>
+        <form action="https://formspree.io/f/your-id-formspree" method="POST" style="display: flex; flex-direction: column; gap: 15px; margin-top: 2rem;">
+            <input type="email" name="_replyto" placeholder="Email của bạn" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+            <textarea name="message" rows="5" placeholder="Nội dung lời nhắn..." required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+            <button type="submit" style="padding: 10px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">Gửi thông tin</button>
+        </form>
+    </section>
+</body>
+</html>
